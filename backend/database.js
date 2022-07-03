@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import logger from './tools/logger.js';
 
 const options = {
     maxPoolSize: 10,

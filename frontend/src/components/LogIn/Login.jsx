@@ -16,6 +16,8 @@ import IconButton from '@mui/material/IconButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInThunk } from '../../store/logInSlice';
 
 function Copyright(props) {
   return (
@@ -31,14 +33,20 @@ const theme = createTheme();
 
 function SignIn() {
 
+  //  states
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [message, setMessage] = useState('');
-    const [messageColor, setMessageColor] = useState('red')
+    // const [messageColor, setMessageColor] = useState('red')
     const [error1, setError1] = useState(false);
     const [error2, setError2] = useState(false);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
+    // refs
+
+    // store 
+    const dispatch = useDispatch();
+    const { signInResponse } = useSelector((state) => (state.logIn));
 
     const newEmail = (e) => {
         setEmail(e.target.value);
@@ -63,21 +71,22 @@ function SignIn() {
     if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/.test(email)) {
       setMessage('Please enter email address');
       setError1(true);
-      setMessageColor('red');
+      // setMessageColor('red');
       return;
     }
     if (!/(?=.{8,})/.test(password)) {
         setMessage('Password must at least 8 characters');
         setError2(true);
-        setMessageColor('red');
+        // setMessageColor('red');
         return;
     }
     if (!/(?=.*[0-9])/.test(password)) {
         setMessage('Password must contain at least 1 number');
         setError2(true);
-        setMessageColor('red');
+        // setMessageColor('red');
         return;
     }
+     dispatch(signInThunk({email, password}));
   };
 
   useEffect(() => {
@@ -87,6 +96,22 @@ function SignIn() {
         setDisabled(true);
      }
   }, [email, password])
+
+  useEffect(() => {
+    console.log(signInResponse);
+    if(signInResponse.status){
+      if (signInResponse.status == 404) {
+        setMessage('User Not Found')
+      } else if (signInResponse.status == 201) {
+         if (typeof(signInResponse.data) == 'string'){
+           setMessage('Wrong Password');
+           setError2(true);
+         } else {
+          //  'signed in'
+         }
+      }
+    }
+  }, signInResponse)
 
   return (
     <ThemeProvider theme={theme}>
@@ -155,7 +180,7 @@ function SignIn() {
               label="Remember me"
             /> */}
             <Typography sx={{
-                color: messageColor,
+                color: 'red',
             }}>
                 {message}
             </Typography>

@@ -40,12 +40,17 @@ const loginSlice = createSlice({
     reducers: { 
         clearResponse: (state,action) => {
             state.signInResponse = null;
+        },
+        clearUser:(state, action) => {
+            state.user = {};
         }
     },
     extraReducers:{
     [signInThunk.fulfilled]: (state, action) => {
-        state.signInResponse = action.payload;
-        if (typeof(action.paylaod) == 'object') {
+        if (!action.payload.email) {
+            state.signInResponse = action.payload;
+        } else {
+            state.signInResponse = action.payload;
             state.user = action.payload;
         }
     },
@@ -53,7 +58,6 @@ const loginSlice = createSlice({
         state.signInResponse = action.payload;
     },
     [authenticateThunk.fulfilled]: (state, action) => {
-        console.log(action.payload);
         const isAuth = Boolean(action.payload.email);
        if (!isAuth) {
           state.user = {};
@@ -68,5 +72,5 @@ const loginSlice = createSlice({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
-export const {clearResponse} = loginSlice.actions;
+export const {clearResponse, clearUser} = loginSlice.actions;
 export default loginSlice.reducer;

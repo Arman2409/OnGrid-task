@@ -22,14 +22,15 @@ function App() {
           setIsAuthenticated(false);
         }
       }
+       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [user])
 
    useEffect(() => {
      dispatch(authenticateThunk())
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
   return (
-    // (<Navigate to='/mainPage'/>) :  (<Navigate to='/signIn'/>) )
       <Router>
         {isAuthenticated !== null ? 
         <Routes>

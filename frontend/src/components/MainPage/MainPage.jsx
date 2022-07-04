@@ -1,31 +1,26 @@
 import React,{ useState, useEffect, useRef} from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import { Card, CardContent} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
-import { authenticateThunk } from '../../store/logInSlice';
+import { authenticateThunk, clearUser } from '../../store/logInSlice';
 import Loading from '../Loading/Loading';
-import {getResultThunk} from '../../store/mainPageSlice';
+import {getResultThunk, logOutThunk, clearLogOutResponse} from '../../store/mainPageSlice';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-     Ghazaryan Arman{' '}
+     {'G. A.'}{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -53,35 +48,39 @@ function DashboardContent() {
     const [renderStatus, setRenderStatus] = useState(false);
     const [loading, setLoading] = useState(false);
     const [result,setResult] = useState('');
+    const [status, setStatus] = useState('')
 
     // refs 
     const timinig = useRef(null);
 
     const navigate = useNavigate();
+    // store
     const {user} = useSelector((state) => state.logIn);
-    const {userResult} = useSelector((state) => state.mainPage);
+    const {userResult, logOutResponse} = useSelector((state) => state.mainPage);
     const dispatch = useDispatch();
 
    const logOut = () => {
-      
+      dispatch(logOutThunk());
+      dispatch(clearUser());
    };
 
    useEffect(() => {
-    if (!user.email) {
-        setRenderStatus(false);
-    } else {
-        setRenderStatus(true);
-    }
-    dispatch(authenticateThunk());
-    setLoading(true);
-    timinig.current = setTimeout(() => {
-       if(!user.email) {
-        navigate('/signIn');
-       } else if (user.email) {
-        clearTimeout(timinig.current);
-        timinig.current = null;
-       }
-    }, 1000)
+      if (!user.email) {
+         setRenderStatus(false);
+         timinig.current = setTimeout(() => {
+          if(!user.email) {
+           navigate('/signIn');
+          } else if (user.email) {
+           clearTimeout(timinig.current);
+           timinig.current = null;
+          }
+      }, 1000)
+      dispatch(authenticateThunk());
+      setLoading(true);
+     } else {
+         setRenderStatus(true);
+     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    useEffect(() => {
@@ -92,17 +91,33 @@ function DashboardContent() {
         dispatch(getResultThunk());
         setLoading(false);
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [user]);
 
    useEffect(() => {
       if (userResult) {
-         if (typeof(userResult) == 'number') {
             setResult(userResult);
-         }
+            const number = parseInt(userResult);
+            if (number) {
+                setStatus(number > 4 ? "PASSED" : "NOT PASSED")
+            }
       } else {
         setResult('Getting your result...')
       }
+       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [userResult])
+
+   useEffect(() => {
+    console.log(logOutResponse);
+      if (logOutResponse) {
+         if (logOutResponse === 'Logged Out') {   
+            dispatch(clearLogOutResponse());
+            clearTimeout(timinig.current);
+            navigate('/signIn');
+         }
+      }
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [logOutResponse])
 
   return (
     <>
@@ -128,11 +143,12 @@ function DashboardContent() {
             <Box sx={{ display: 'flex', alignItems:'center', justifyContent: 'space-between'}}>
                   <AccountCircleIcon />
               <Typography>
-                  {user.email}
+                  {!user.email ? 'username' : user.email}
               </Typography>
               <IconButton 
+              sx={{ml:'20px'}}
                onClick={logOut}>
-                <LogoutIcon />
+                <LogoutIcon sx={{fontSize: '30px'}}/>
               </IconButton>
             </Box>
           </Toolbar>
@@ -151,7 +167,22 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-           
+            <Card sx={{width: '320px', height: '200px'}}>
+            <CardContent>
+              <Typography sx={{ fontSize: 14 }} color="primary" gutterBottom>
+                Exam result
+              </Typography>
+              <Typography  color="text.secondary">
+               Your score is
+              </Typography>
+              <Typography sx={{ mt: 1.5 ,mb: 0.5 }} variant="h5" color="black">
+                {result} of 10
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {status}
+              </Typography>
+            </CardContent>
+            </Card>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

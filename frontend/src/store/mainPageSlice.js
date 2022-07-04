@@ -10,7 +10,7 @@ export const getResultThunk = createAsyncThunk(
             return fulfillWithValue(response.data);
        } catch (e) {
            if (!e.response) {
-               throw e
+             console.error(e);
              }
              return rejectWithValue(e.response)
        }
@@ -26,9 +26,9 @@ export const logOutThunk = createAsyncThunk(
             return fulfillWithValue(response.data);
        } catch (e) {
            if (!e.response) {
-               throw e
+               console.error(e);
              }
-             return rejectWithValue(e.response)
+             return rejectWithValue(e.response.data)
        }
     }
 );
@@ -40,7 +40,9 @@ const mainSlice = createSlice({
         logOutResponse: null,
     },
     reducers: { 
-        // ...
+       clearLogOutResponse: (state, action) => {
+          state.logOutResponse = null;
+       }
     },
     extraReducers: {
     [getResultThunk.fulfilled]: (state, action) => {
@@ -50,6 +52,7 @@ const mainSlice = createSlice({
         state.userResult = {error: action.payload};
     },
     [logOutThunk.fulfilled]: (state, action) => {
+        console.log(action.payload);
         state.logOutResponse = action.payload;
     },
     [logOutThunk.rejected]: (state, action) => {
@@ -58,4 +61,5 @@ const mainSlice = createSlice({
     }
 })
 
+export const {clearLogOutResponse} = mainSlice.actions;
 export default mainSlice.reducer

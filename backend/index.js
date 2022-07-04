@@ -11,6 +11,7 @@ import logger from './tools/logger.js';
 import authenticate from './controllers/authenticate.js';
 import logIn from './controllers/signIn.js';
 import getResult from './controllers/getResult.js';
+import logOut from './controllers/logOut.js';
 
 dotenv.config();
 const app = express();
@@ -25,8 +26,7 @@ app.use(sessions({
     cookie: {maxAge: 60000},
 }));
 app.use((req,res,next) => {
-    console.log(req.path);
-    console.log(req.session);
+    logger.info(req.method + ' ' + req.path);
     next();
 })
 
@@ -35,6 +35,7 @@ app.use((req,res,next) => {
 app.get('/isAuthenticated', authenticate);
 app.get('/signIn',logIn);
 app.get('/getResult', getResult);
+app.get('/logOut', logOut);
 
 const port = normalizePort(process.env.PORT || process.env.PORT);
 app.listen(port, () => {

@@ -1,10 +1,8 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -22,7 +20,7 @@ import useKeypress from 'react-use-keypress';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '} Ghazaryan Arman
+       {'G. A.'}{'Copyright © '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -59,11 +57,8 @@ function SignIn() {
         setError2(false);
     }
     };
-
-  const handleVisibility = () => {
-    setPasswordVisibility(!passwordVisibility)
-  }
-
+ 
+   // sign in button onClick 
   const handleSubmit = (event) => {
     if(!(email && password)) {
       setDisabled(true);
@@ -73,19 +68,16 @@ function SignIn() {
     if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/.test(email)) {
       setMessage('Please enter email address');
       setError1(true);
-      // setMessageColor('red');
       return;
     }
     if (!/(?=.{8,})/.test(password)) {
         setMessage('Password must at least 8 characters');
         setError2(true);
-        // setMessageColor('red');
         return;
     }
     if (!/(?=.*[0-9])/.test(password)) {
         setMessage('Password must contain at least 1 number');
         setError2(true);
-        // setMessageColor('red');
         return;
     }
      dispatch(clearResponse())
@@ -98,7 +90,6 @@ function SignIn() {
   });
 
   useEffect(() => {
-    console.log(email, password);
      if (email && password) {
         setDisabled(false);
      } else {
@@ -107,22 +98,24 @@ function SignIn() {
   }, [email, password])
 
   useEffect(() => {
-    console.log(signInResponse)
     if(signInResponse){
       setIsRequesting(false);
-      if (signInResponse == 'User Not Found') {
+      if (signInResponse === 'User Not Found') {
         setMessage('User Not Found');
-      } else if (signInResponse == 'Wrong Password') {
+      } else if (signInResponse === 'Wrong Password') {
          setMessage('Wrong Password');
       } else if (typeof(signInResponse) == 'object'){
          navigate('/mainPage');
+         dispatch(clearResponse());
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [signInResponse])
 
   useEffect(() => {
     setDisabled(false);
-  })
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Box sx={{
@@ -181,10 +174,10 @@ function SignIn() {
                         <IconButton
                         sx={{
                             cursor: 'pointer',
-                            zIndex: '6'
+                            zIndex: '11'
                         }}
-                        onClick={handleVisibility}>
-                            {passwordVisibility ? <VisibilityIcon/> : <VisibilityOffIcon />}
+                        onClick={() => setPasswordVisibility(!passwordVisibility)}>
+                            {passwordVisibility ? <VisibilityIcon sx={{zIndex:2}} /> : <VisibilityOffIcon sx={{zIndex:2}} />}
                         </IconButton>
                     </InputAdornment>
                 ),

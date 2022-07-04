@@ -13,12 +13,11 @@ async function logIn ( req,res) {
             bcrypt.compare(password, cursor.password, (err, response) => {
                if (err) {
                   logger.error(`${e.message}`);
-                  res.status(500);
+                  res.status(500).end();
                };
                if (response) {
                  req.session.user = cursor;
                  res.status(201).send(cursor);
-                 res.end();
                  return;
                } else {
                 res.status(201).send('Wrong Password');
@@ -30,7 +29,7 @@ async function logIn ( req,res) {
          }
      }).clone().catch(function(err){ 
         logger.error(err);
-        res.status(500);
+        res.status(500).end();
     });
 }
 

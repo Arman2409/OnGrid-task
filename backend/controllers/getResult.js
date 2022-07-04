@@ -1,4 +1,3 @@
-import { response } from 'express';
 import Results from '../../models/Result.js';
 import logger from '../tools/logger.js';
 
@@ -11,7 +10,6 @@ async function getResult(req, res) {
             res.status(500).send("Error Occured")
           }
           if (cursor) {
-            console.log(cursor);
             res.status(200);
             res.send(cursor.result);
           } else {
@@ -20,7 +18,7 @@ async function getResult(req, res) {
       })
     } else {
       res.status(401).send('Not Authorized, Error Occured');
-      res.end();
+      logger.error('Not Authorized To Get Result')
     }
 }
 

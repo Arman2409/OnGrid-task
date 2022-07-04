@@ -6,12 +6,17 @@ const Loading = () => {
         <Box sx={{
             width: '100%',
             height: '100%',
+            backgroundColor: 'black',
             position: 'fixed',
             top: '0px',
             left: '0px',
             zIndex: '4',
+            opacity: '0.5',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
         }}>
-          <CircularProgress />
+          <CircularProgress color="secondary"/>
         </Box>
     )
 }

@@ -4,7 +4,6 @@ import normalizePort from 'normalize-port';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import bcrypt from 'bcrypt';
 
 import logger from './tools/logger.js';
 
@@ -26,6 +25,7 @@ app.use(sessions({
 }));
 app.use((req,res,next) => {
     console.log(req.path);
+    console.log(req.session);
     next();
 })
 
@@ -35,7 +35,6 @@ app.get('/isAuthenticated', authenticate);
 app.get('/signIn',logIn);
 
 const port = normalizePort(process.env.PORT || process.env.PORT);
-
 app.listen(port, () => {
-    logger.info(`Server listening on port ${port}`);
+    logger.info(`Server running on port ${port}`);
 })

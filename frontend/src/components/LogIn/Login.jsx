@@ -1,23 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInThunk } from '../../store/logInSlice';
+import { signInThunk, clearResponse } from '../../store/logInSlice';
+import Loading from '../Loading/Loading.jsx';
+import {useNavigate} from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -29,21 +28,19 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
-
 function SignIn() {
 
   //  states
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [disabled, setDisabled] = useState(true);
+    const [disabled, setDisabled] = useState(false);
     const [message, setMessage] = useState('');
-    // const [messageColor, setMessageColor] = useState('red')
     const [error1, setError1] = useState(false);
     const [error2, setError2] = useState(false);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
-    // refs
-
+    const [isRequesting, setIsRequesting] = useState(false);
+    
+    const navigate = useNavigate();
     // store 
     const dispatch = useDispatch();
     const { signInResponse } = useSelector((state) => (state.logIn));
@@ -66,7 +63,12 @@ function SignIn() {
     console.log("click")
     setPasswordVisibility(!passwordVisibility)
   }
+
   const handleSubmit = (event) => {
+    if(!(email && password)) {
+      setDisabled(true);
+      return;
+    }
     event.preventDefault();
     if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/.test(email)) {
       setMessage('Please enter email address');
@@ -86,10 +88,14 @@ function SignIn() {
         // setMessageColor('red');
         return;
     }
+     dispatch(clearResponse())
      dispatch(signInThunk({email, password}));
+     setIsRequesting(true);
+
   };
 
   useEffect(() => {
+    console.log(email, password);
      if (email && password) {
         setDisabled(false);
      } else {
@@ -98,25 +104,28 @@ function SignIn() {
   }, [email, password])
 
   useEffect(() => {
-    console.log(signInResponse);
-    if(signInResponse.status){
-      if (signInResponse.status == 404) {
-        setMessage('User Not Found')
-      } else if (signInResponse.status == 201) {
-         if (typeof(signInResponse.data) == 'string'){
-           setMessage('Wrong Password');
-           setError2(true);
-         } else {
-          //  'signed in'
-         }
+    console.log(signInResponse)
+    if(signInResponse){
+      setIsRequesting(false);
+      if (signInResponse == 'User Not Found') {
+        setMessage('User Not Found');
+      } else if (signInResponse == 'Wrong Password') {
+         setMessage('Wrong Password');
+      } else if (typeof(signInResponse) == 'object'){
+         navigate('/mainPage');
       }
     }
-  }, signInResponse)
+  }, [signInResponse])
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+    <Box sx={{
+      width: '100%',
+      position: 'fixed',
+      minHeight: '100%'
+    }}>
+      <Container component="div" maxWidth="xs">
         <CssBaseline />
+        {isRequesting && <Loading />}
         <Box
           sx={{
             marginTop: 8,
@@ -140,7 +149,8 @@ function SignIn() {
               name="email"
               error={error1}
               autoComplete="email"
-              onChange={newEmail}
+              onInput={newEmail}
+              value={email}
               autoFocus
             />
             <TextField
@@ -150,7 +160,8 @@ function SignIn() {
               label="Password"
               type={passwordVisibility ? "text" : "password"}
               error={error2}
-              onChange={newPassword}
+              onInput={newPassword}
+              value={password}
               id="password"
               autoComplete="current-password"
               InputProps={{
@@ -175,10 +186,6 @@ function SignIn() {
                 }
               }}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Typography sx={{
                 color: 'red',
             }}>
@@ -197,7 +204,7 @@ function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+   </Box>
   );
 }
 

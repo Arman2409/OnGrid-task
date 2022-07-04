@@ -1,12 +1,14 @@
 import logger from "../tools/logger.js";
 
 async function authenticate (req, res) {
-    if (req.session.cookie.user) {
-      res.status(200).send(req.session.cookie.user);
+    if (req.session.user) {
+      logger.info('Authenticated')
+      res.status(200).send(req.session.user);
       res.end();
     } else {
-      logger.error('Not authenticated');
-      res.status(200).end();
+      logger.info('Not authenticated');
+      res.status(200).send('Not Authenticated')
+      res.end();
     };
 };
 

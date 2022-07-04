@@ -7,23 +7,23 @@ async function logIn ( req,res) {
     const {email, password} = req.query;
     console.log(req.query);
     console.log(email);
-    await UserModel.findOne({email:email}, function (err, cursor) 
-    { if (err ) logger.error(`${err}`);
+    await UserModel.findOne({email:email}, function (err, cursor) {
+       if (err ) logger.error(`${err}`);
       if (cursor) {
             bcrypt.compare(password, cursor.password, (err, response) => {
                if (err) console.log(err);
                if (response) {
-                 req.session.cookie.user = cursor;
+                 req.session.user = cursor;
                  res.status(201).send(cursor);
                  res.end();
                  return;
                } else {
-                res.status(201).send('Wrond password');
+                res.status(201).send('Wrong Password');
                 res.end();
                }
             })
          } else {
-            res.status(404).send('User not found')
+            res.status(201).send('User Not Found')
             res.end();
             return;
          }

@@ -1652,3 +1652,49 @@
 *****info*****   Server running on port 3001
 *****info*****   Server running on port 3001
 *****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut
+*****error*****   Logging Out But Not Logged In
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut

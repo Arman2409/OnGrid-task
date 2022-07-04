@@ -10,6 +10,7 @@ import logger from './tools/logger.js';
 // controllers 
 import authenticate from './controllers/authenticate.js';
 import logIn from './controllers/signIn.js';
+import getResult from './controllers/getResult.js';
 
 dotenv.config();
 const app = express();
@@ -33,6 +34,7 @@ app.use((req,res,next) => {
 
 app.get('/isAuthenticated', authenticate);
 app.get('/signIn',logIn);
+app.get('/getResult', getResult);
 
 const port = normalizePort(process.env.PORT || process.env.PORT);
 app.listen(port, () => {

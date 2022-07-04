@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInThunk, clearResponse } from '../../store/logInSlice';
 import Loading from '../Loading/Loading.jsx';
 import {useNavigate} from 'react-router-dom';
+import useKeypress from 'react-use-keypress';
 
 function Copyright(props) {
   return (
@@ -60,7 +61,6 @@ function SignIn() {
     };
 
   const handleVisibility = () => {
-    console.log("click")
     setPasswordVisibility(!passwordVisibility)
   }
 
@@ -91,8 +91,11 @@ function SignIn() {
      dispatch(clearResponse())
      dispatch(signInThunk({email, password}));
      setIsRequesting(true);
-
   };
+
+  useKeypress('Enter', () => {
+     handleSubmit();
+  });
 
   useEffect(() => {
     console.log(email, password);
@@ -116,6 +119,10 @@ function SignIn() {
       }
     }
   }, [signInResponse])
+
+  useEffect(() => {
+    setDisabled(false);
+  })
 
   return (
     <Box sx={{

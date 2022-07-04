@@ -17,14 +17,11 @@ function App() {
    useEffect(() => {
       if (user) {
         if(user.email) {
-          console.log('here');
           setIsAuthenticated(true);
         } else {
-          console.log('exactly here');
           setIsAuthenticated(false);
         }
       }
-      console.log(isAuthenticated);
    }, [user])
 
    useEffect(() => {

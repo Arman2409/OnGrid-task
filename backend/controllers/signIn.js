@@ -8,10 +8,13 @@ async function logIn ( req,res) {
     console.log(req.query);
     console.log(email);
     await UserModel.findOne({email:email}, function (err, cursor) {
-       if (err ) logger.error(`${err}`);
+      if (err ) logger.error(`${err}`);
       if (cursor) {
             bcrypt.compare(password, cursor.password, (err, response) => {
-               if (err) console.log(err);
+               if (err) {
+                  logger.error(`${e.message}`);
+                  res.status(500);
+               };
                if (response) {
                  req.session.user = cursor;
                  res.status(201).send(cursor);
@@ -19,17 +22,15 @@ async function logIn ( req,res) {
                  return;
                } else {
                 res.status(201).send('Wrong Password');
-                res.end();
                }
             })
          } else {
-            res.status(201).send('User Not Found')
-            res.end();
+            res.status(201).send('User Not Found');
             return;
          }
      }).clone().catch(function(err){ 
         logger.error(err);
-        res.status(500).end();
+        res.status(500);
     });
 }
 

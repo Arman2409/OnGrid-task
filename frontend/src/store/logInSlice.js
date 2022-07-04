@@ -58,7 +58,6 @@ const loginSlice = createSlice({
        if (!isAuth) {
           state.user = {};
        } else {
-        console.log('here1')
           state.user = action.payload;
        }
     },

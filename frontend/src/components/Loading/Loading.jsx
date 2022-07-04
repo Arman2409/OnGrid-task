@@ -10,7 +10,7 @@ const Loading = () => {
             position: 'fixed',
             top: '0px',
             left: '0px',
-            zIndex: '4',
+            zIndex: '7',
             opacity: '0.5',
             display: 'flex',
             alignItems: 'center',

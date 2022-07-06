@@ -5,6 +5,7 @@ import { BrowserRouter as Router,
         Navigate} from 'react-router-dom';
 import LogIn from './components/LogIn/Login';
 import MainPage from './components/MainPage/MainPage';
+import NotFound from './components/NotFound/NotFound';
 import { authenticateThunk } from './store/logInSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from './components/Loading/Loading';
@@ -41,7 +42,7 @@ function App() {
           </Route> 
           <Route path='/signIn' element={<LogIn/>} />
           <Route path='/mainPage' element={<MainPage/>} ></Route>
-          <Route ></Route>
+          <Route path='*' element={<NotFound />}></Route>
         </Routes>
         : <Loading />}
       </Router> 

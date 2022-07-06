@@ -5,8 +5,6 @@ import logger from '../tools/logger.js';
 
 async function logIn ( req,res) {
     const {email, password} = req.query;
-    console.log(req.query);
-    console.log(email);
     await UserModel.findOne({email:email}, function (err, cursor) {
       if (err ) logger.error(`${err}`);
       if (cursor) {

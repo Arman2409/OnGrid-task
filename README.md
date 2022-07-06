@@ -1,6 +1,6 @@
 # Guide to run the project locally
 
-**For Windows system (can also work for Linux and Mac systems ocassionally)
+**For Windows system (Windows 10, Windows 11,can also work for Linux and Mac systems ocassionally).
 
 First of all you will need Node.js,Git,any code editor and a browser installed on your computer.
 You will need Git to clone the project on your computer,code editor to open it,Node.js to run it and browser to visit it.You will also need MongoDB installed if you are using local database.

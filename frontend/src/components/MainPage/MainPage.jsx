@@ -108,7 +108,6 @@ function DashboardContent() {
    }, [userResult])
 
    useEffect(() => {
-    console.log(logOutResponse);
       if (logOutResponse) {
          if (logOutResponse === 'Logged Out') {   
             dispatch(clearLogOutResponse());

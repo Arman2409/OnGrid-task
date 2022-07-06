@@ -6,9 +6,13 @@ First of all you will need Node.js,Git,any code editor and a browser installed o
 You will need Git to clone the project on your computer,code editor to open it,Node.js to run it and browser to visit it.You will also need MongoDB installed if you are using local database.
 To have the project locally you have to clone it from Github.
 MVC pattern was used to make the project,so you will need to run   
+
  > 'npm install'
+
 from /backend and /frontend folders.Than you can run /frontend by command 
+
  > 'npm start'
+
 To run /backend you will need to add .env file to it for environment variables. Your .env file needs to have these variables.
 
 SESSION_SECRET= .... 
@@ -25,7 +29,9 @@ which you don't need to run and won't need MongoDB installed.The email and passw
 You can also make manual changes from /controllers/signIn controller if you can't provide hashed password or just skip all database parts if both variants are unavailable.
 SESSION_SECRET variable can be of any value and PORT variable should have the value of 3001.
 After these configurations you can run command 
+
  >'npm run start'
+ 
 from '/backend' and run the server to use it in synchrony with frontend.After all these
 you can visit the web server 
 http://localhost:3000

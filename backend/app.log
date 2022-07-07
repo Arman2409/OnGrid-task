@@ -1762,3 +1762,24 @@ undefined
 *****info*****   GET /isAuthenticated
 *****info*****   Server running on port 3001
 *****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   Server running on port 3001
+!!!! error !!!!!    querySrv ECONNREFUSED _mongodb._tcp.cluster0.jh3pp.mongodb.net
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+!!!! error !!!!!    Operation `users.findOne()` buffering timed out after 10000ms
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid

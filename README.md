@@ -15,8 +15,10 @@ from /backend and /frontend folders.Than you can run /frontend by command
 
 To run /backend you will need to add .env file to it for environment variables. Your .env file needs to have these variables.
 
-SESSION_SECRET= .... 
+SESSION_SECRET= ....  
+
 PORT=3001
+
 MONGODB_URL= ...
 
 If you are using your own database, your database should have collections named 'users' 

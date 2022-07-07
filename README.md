@@ -1,5 +1,5 @@
-# Live Demo
-https://github.com/Arman2409/OnGrid-task.git
+# Live demo
+https://ongird.herokuapp.com/
 
 # Guide to run the project locally
 

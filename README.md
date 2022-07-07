@@ -1,6 +1,9 @@
 # Live demo
 https://ongird.herokuapp.com/
 
+email - user@email.com
+password - password1
+
 # Guide to run the project locally
 
 **For Windows system (Windows 10, Windows 11,can also work for Linux and Mac systems ocassionally).

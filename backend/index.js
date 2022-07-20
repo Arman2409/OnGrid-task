@@ -37,7 +37,7 @@ app.get('/signIn',logIn);
 app.get('/getResult', getResult);
 app.get('/logOut', logOut);
 
-const port = normalizePort(process.env.PORT || process.env.PORT);
+const port = normalizePort(process.env.PORT || 3001);
 app.listen(port, () => {
     logger.info(`Server running on port ${port}`);
 })

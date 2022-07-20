@@ -1783,3 +1783,24 @@ undefined
 *****info*****   GET /logOut
 *****info*****   Server running on port 3001
 *****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+!!!! error !!!!!    The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+*****info*****   Server running on port undefined
+*****info*****   Server running on port 3001
+*****info*****   Databe connected to mongodb+srv://Ghazaryan2409:AR122333@cluster0.jh3pp.mongodb.net/OnGrid
+*****info*****   GET /
+*****info*****   GET /isAuthenticated
+*****info*****   GET /isAuthenticated
+*****info*****   GET /signIn
+*****info*****   GET /getResult
+*****info*****   GET /getResult
+*****info*****   GET /logOut

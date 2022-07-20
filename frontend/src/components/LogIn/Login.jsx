@@ -64,7 +64,6 @@ function SignIn() {
       setDisabled(true);
       return;
     }
-    event.preventDefault();
     if (!/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/.test(email)) {
       setMessage('Please enter email address');
       setError1(true);

@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  client:
+    container_name: WebApplication 
+    build:
+      dockerfile: Dockerfile
+    volumes:
+        # Any volumes you would mount goes here
+    ports:
+        # Ports that need to be mapped from container to host goes here
+    environment:
+        # Any environment variables

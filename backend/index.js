@@ -4,6 +4,7 @@ import normalizePort from 'normalize-port';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 import logger from './tools/logger.js';
 
@@ -29,13 +30,17 @@ app.use((req,res,next) => {
     logger.info(req.method + ' ' + req.path);
     next();
 })
+app.use(express.static(path.join(path.resolve(),'/frontend/build/')));
+app.get('*', (req,res) => {
+    res.sendFile(path.join(path.resolve(),'/frontend/build/index.html'));
+})
 
 // routes
 
-app.get('/isAuthenticated', authenticate);
-app.get('/signIn',logIn);
-app.get('/getResult', getResult);
-app.get('/logOut', logOut);
+app.get('/api/isAuthenticated', authenticate);
+app.get('/api/signIn',logIn);
+app.get('/api/getResult', getResult);
+app.get('/api/logOut', logOut);
 
 const port = normalizePort(process.env.PORT || 3001);
 app.listen(port, () => {

@@ -1,0 +1,23 @@
+{
+  "name": "ongrid-task",
+  "version": "1.0.0",
+  "description": "https://ongird.herokuapp.com/",
+  "main": "/backend/index.js",
+  "scripts": {
+    "start": "nodemon ./backend/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arman2409/OnGrid-task.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arman2409/OnGrid-task/issues"
+  },
+  "homepage": "https://github.com/Arman2409/OnGrid-task#readme",
+  "dependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

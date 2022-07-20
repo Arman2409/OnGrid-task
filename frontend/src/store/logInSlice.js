@@ -5,7 +5,7 @@ export const signInThunk = createAsyncThunk(
      'login/signInThunk',
      async (user, { fulfillWithValue,rejectWithValue}) => {
         try {
-          const api = '/signIn'
+          const api = '/api/signIn'
           const response = await axios.get(api, {params: user});
              return fulfillWithValue(response.data);
         } catch (e) {
@@ -21,7 +21,7 @@ export const authenticateThunk = createAsyncThunk(
     'login/authenticateThunk',
     async (_, { fulfillWithValue,rejectWithValue}) => {
        try {
-         const api = '/isAuthenticated';
+         const api = '/api/isAuthenticated';
          const response = await axios.get(api);
             return fulfillWithValue(response.data);
        } catch (e) {

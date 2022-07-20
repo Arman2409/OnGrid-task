@@ -5,7 +5,7 @@ export const getResultThunk = createAsyncThunk(
     'login/getResultThunk',
     async (_, { fulfillWithValue,rejectWithValue}) => {
        try {
-         const api = '/getResult'
+         const api = '/api/getResult'
          const response = await axios.get(api);
             return fulfillWithValue(response.data);
        } catch (e) {
@@ -21,7 +21,7 @@ export const logOutThunk = createAsyncThunk(
     'login/logOutThunk',
     async (_, { fulfillWithValue,rejectWithValue}) => {
        try {
-         const api = '/logOut'
+         const api = '/api/logOut'
          const response = await axios.get(api);
             return fulfillWithValue(response.data);
        } catch (e) {
